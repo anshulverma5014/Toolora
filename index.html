@@ -1,0 +1,569 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+.et[data-theme=dark]{
+  --bg:#0a0a0f;--surface:#111118;--card:#16161f;
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.15);
+  --text:#eeeef2;--muted:#6b6b80;--muted2:#9494aa;
+  --red:#ff5f5f;--amber:#f0a030;--blue:#5b9cf6;--green:#3ecf8e;--purple:#a78bfa;
+  --pwd-bg:#0d0d14;--pwd-border:rgba(62,207,142,0.2);
+  --tab-active-text:#fff;
+  --glow1:rgba(255,95,95,0.05);--glow2:rgba(91,156,246,0.06);
+}
+.et[data-theme=light]{
+  --bg:#f5f2eb;--surface:#fffef9;--card:#ffffff;
+  --border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.2);
+  --text:#1a1714;--muted:#8a857c;--muted2:#5a5650;
+  --red:#c0392b;--amber:#d4870a;--blue:#185fa5;--green:#0f6e56;--purple:#534ab7;
+  --pwd-bg:#1a1714;--pwd-border:rgba(15,110,86,0.3);
+  --tab-active-text:#fff;
+  --glow1:rgba(192,57,43,0.04);--glow2:rgba(24,95,165,0.04);
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 768px){
+
+  .et-inner{
+    padding:0 1rem;
+  }
+
+  .top-bar{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .theme-toggle{
+    width:100%;
+    justify-content:space-between;
+  }
+
+  .theme-btn{
+    flex:1;
+    justify-content:center;
+  }
+
+  .tabs{
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    scrollbar-width:none;
+  }
+
+  .tabs::-webkit-scrollbar{
+    display:none;
+  }
+
+  .tab-btn{
+    flex-shrink:0;
+    padding:8px 12px;
+    font-size:0.72rem;
+  }
+
+  .row2{
+    grid-template-columns:1fr;
+  }
+
+  .result-grid{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .stats-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .check-grid{
+    grid-template-columns:1fr;
+  }
+
+  .conv-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .swap-btn{
+    align-self:center;
+    margin:0;
+    transform:rotate(90deg);
+  }
+
+  .btn-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .btn-row button{
+    width:100%;
+    justify-content:center;
+  }
+
+  .action-btn,
+  .ghost-btn{
+    width:100%;
+  }
+
+  .big-num{
+    font-size:2rem;
+  }
+
+  .conv-result{
+    font-size:1.4rem;
+    word-break:break-word;
+  }
+
+  textarea{
+    min-height:110px;
+  }
+
+  .pwd-display{
+    font-size:0.82rem;
+    letter-spacing:1px;
+    padding:14px;
+  }
+
+  .card{
+    padding:1rem;
+  }
+
+  .et-title{
+    line-height:1.1;
+  }
+
+  .badge{
+    font-size:10px;
+  }
+
+  .bmi-scale-labels{
+    font-size:8px;
+  }
+
+}
+
+
+/* EXTRA SMALL DEVICES */
+
+@media (max-width: 480px){
+
+  .stats-grid{
+    grid-template-columns:1fr;
+  }
+
+  .et-title{
+    font-size:2rem;
+  }
+
+  .et-sub{
+    font-size:0.85rem;
+  }
+
+  .tool-num{
+    font-size:1.5rem;
+  }
+
+  .card-top{
+    gap:10px;
+  }
+
+  .big-num{
+    font-size:1.7rem;
+  }
+
+  .conv-result{
+    font-size:1.2rem;
+  }
+  
+
+}
+
+.et{
+  font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);
+  padding:0 0 2rem;border-radius:16px;position:relative;overflow:hidden;
+  transition:background 0.3s,color 0.3s;
+}
+.et::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 40% at 10% 0%,var(--glow1) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 90% 80%,var(--glow2) 0%,transparent 60%);z-index:0;}
+.et-inner{position:relative;z-index:1;padding:0 1.5rem;}
+.et-header{padding:2rem 0 1.5rem;}
+
+.top-bar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'Syne',sans-serif;font-size:30px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:12px; .eyebrow{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(24px, 5vw, 36px);
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.creator{
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.9;
+  margin-top: 6px;
+  color: #738c87;
+}}
+.eyebrow::before{content:'';display:block;width:20px;height:2px;background:currentColor;}
+
+.theme-toggle{display:flex;align-items:center;gap:0;background:var(--surface);border:0.5px solid var(--border);border-radius:100px;padding:3px;flex-shrink:0;margin-top:4px;}
+.theme-btn{border:none;border-radius:100px;padding:5px 13px;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:5px;background:transparent;color:var(--muted);}
+.theme-btn.active{background:var(--text);color:var(--bg);}
+
+.et-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.8rem,5vw,3rem);line-height:1;letter-spacing:-2px;margin-bottom:10px;color:var(--text);}
+.et-title em{font-style:normal;color:var(--red);}
+.et-sub{color:var(--muted2);font-size:0.92rem;font-weight:300;line-height:1.6;margin-bottom:16px;}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem;}
+.badge{background:var(--surface);border:0.5px solid var(--border);border-radius:6px;padding:3px 10px;font-size:11px;color:var(--muted2);}
+
+.tabs{display:flex;gap:4px;background:var(--surface);border:0.5px solid var(--border);border-radius:12px;padding:5px;flex-wrap:wrap;margin-bottom:1.5rem;}
+.tab-btn{background:transparent;border:none;color:var(--muted2);padding:8px 14px;border-radius:8px;cursor:pointer;font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.3px;transition:all 0.18s;display:flex;align-items:center;gap:5px;white-space:nowrap;}
+.tab-btn:hover{color:var(--text);}
+.tab-btn.active{background:var(--red);color:var(--tab-active-text);}
+
+.panel{display:none;}.panel.active{display:block;}
+.card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1rem;transition:background 0.3s,border-color 0.3s;}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.25rem;}
+.card-top h2{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);}
+.tool-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--border);line-height:1;}
+.lbl{display:block;font-size:11px;font-weight:500;letter-spacing:0.8px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.field{margin-bottom:14px;}
+
+input[type=text],input[type=number],input[type=date],select,textarea{
+  width:100%;background:var(--surface);border:0.5px solid var(--border);border-radius:8px;
+  color:var(--text);padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:0.92rem;
+  outline:none;transition:border-color 0.2s,background 0.3s;margin-bottom:0;appearance:none;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--border2);}
+select option{background:var(--card);color:var(--text);}
+textarea{resize:vertical;min-height:130px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+.result-box{background:var(--surface);border:0.5px solid var(--border);border-radius:10px;padding:1.25rem;margin-top:1rem;display:none;transition:background 0.3s;}
+.result-box.show{display:block;}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center;}
+.big-num{font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;line-height:1;letter-spacing:-1px;}
+.res-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:4px;}
+.divider{height:0.5px;background:var(--border);margin:1rem 0;}
+
+.action-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer;transition:opacity 0.18s;display:inline-flex;align-items:center;gap:6px;}
+.action-btn:hover{opacity:0.85;}
+.ghost-btn{background:var(--surface);color:var(--muted2);border:0.5px solid var(--border);border-radius:8px;padding:10px 20px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer;transition:all 0.18s;display:inline-flex;align-items:center;gap:6px;}
+.ghost-btn:hover{color:var(--text);border-color:var(--border2);}
+.btn-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px;}
+.flash{font-size:11px;font-weight:700;color:var(--green);display:none;letter-spacing:0.5px;}
+
+.pwd-display{background:var(--pwd-bg);color:var(--green);font-family:'Courier New',monospace;font-size:0.95rem;letter-spacing:2px;padding:16px;border-radius:10px;word-break:break-all;margin:12px 0;min-height:56px;line-height:1.6;border:0.5px solid var(--pwd-border);transition:background 0.3s;}
+.str-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.str-bar{flex:1;height:4px;border-radius:2px;background:var(--border);overflow:hidden;}
+.str-fill{height:100%;border-radius:2px;transition:width 0.4s,background 0.4s;}
+.str-lbl{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.8px;white-space:nowrap;}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;}
+.check-item{display:flex;align-items:center;gap:8px;background:var(--surface);border:0.5px solid var(--border);border-radius:8px;padding:9px 12px;cursor:pointer;font-size:13px;font-weight:500;color:var(--muted2);transition:border-color 0.2s;}
+.check-item:has(input:checked){border-color:var(--red);color:var(--text);}
+.check-item input[type=checkbox]{width:14px;height:14px;margin:0;cursor:pointer;accent-color:var(--red);}
+.range-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+.range-val{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--text);}
+input[type=range]{width:100%;accent-color:var(--red);background:transparent;border:none;padding:0;margin:0;}
+
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;}
+.stat-box{background:var(--surface);border:0.5px solid var(--border);border-radius:10px;padding:12px;text-align:center;transition:background 0.3s;}
+.stat-num{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;line-height:1;letter-spacing:-1px;}
+.stat-lbl{font-size:10px;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-top:3px;}
+
+.conv-row{display:flex;gap:8px;align-items:end;}
+.conv-row>div{flex:1;}
+.swap-btn{background:var(--surface);border:0.5px solid var(--border);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all 0.18s;align-self:end;margin-bottom:14px;flex-shrink:0;color:var(--muted2);}
+.swap-btn:hover{background:var(--red);color:#fff;border-color:var(--red);}
+.conv-result{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;letter-spacing:-1px;color:var(--blue);margin-top:10px;}
+.conv-formula{font-size:12px;color:var(--muted);margin-top:4px;}
+
+.bmi-scale-labels{display:flex;justify-content:space-between;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);margin-bottom:6px;}
+.bmi-bar{height:8px;border-radius:4px;background:linear-gradient(90deg,#38bdf8,#4ade80,#facc15,#f87171);position:relative;}
+.bmi-marker{position:absolute;top:-6px;width:20px;height:20px;background:var(--text);border-radius:50%;border:3px solid var(--card);transform:translateX(-50%);transition:left 0.5s;display:none;}
+.footer-note{text-align:center;padding-top:1rem;font-size:12px;color:var(--muted);}
+.footer-note strong{color:var(--muted2);}
+</style>
+
+<div class="et" data-theme="dark" id="et-root">
+  <div class="et-inner">
+    <div class="et-header">
+      <div class="eyebrow">
+  Toolora
+  <span class="creator"></span>
+</div>
+        <div class="theme-toggle">
+          <button class="theme-btn" id="btn-light" onclick="setTheme('light')"><i class="ti ti-sun" aria-hidden="true"></i> Light</button>
+          <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')"><i class="ti ti-moon" aria-hidden="true"></i> Dark</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('age',this)"><i class="ti ti-cake" aria-hidden="true"></i> Age</button>
+      <button class="tab-btn" onclick="switchTab('password',this)"><i class="ti ti-lock" aria-hidden="true"></i> Password</button>
+      <button class="tab-btn" onclick="switchTab('words',this)"><i class="ti ti-file-text" aria-hidden="true"></i> Word Count</button>
+      <button class="tab-btn" onclick="switchTab('unit',this)"><i class="ti ti-ruler" aria-hidden="true"></i> Unit Convert</button>
+      <button class="tab-btn" onclick="switchTab('bmi',this)"><i class="ti ti-scale" aria-hidden="true"></i> BMI</button>
+    </div>
+
+    <div class="panel active" id="panel-age">
+      <div class="card">
+        <div class="card-top"><h2>Age Calculator</h2><div class="tool-num">01</div></div>
+        <div class="field"><span class="lbl">Date of birth</span><input type="date" id="dob"></div>
+        <div class="field"><span class="lbl">As of date (defaults to today)</span><input type="date" id="as-of"></div>
+        <button class="action-btn" onclick="calcAge()">Calculate age <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+        <div class="result-box" id="age-result">
+          <div class="result-grid">
+            <div><div class="big-num" id="age-years" style="color:var(--red)">—</div><div class="res-lbl">Years</div></div>
+            <div><div class="big-num" id="age-months" style="color:var(--amber)">—</div><div class="res-lbl">Months</div></div>
+            <div><div class="big-num" id="age-days" style="color:var(--blue)">—</div><div class="res-lbl">Days</div></div>
+          </div>
+          <div class="divider"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div><div class="lbl">Total days lived</div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;" id="age-total">—</div></div>
+            <div><div class="lbl">Next birthday</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;" id="age-bday">—</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-password">
+      <div class="card">
+        <div class="card-top"><h2>Password Generator</h2><div class="tool-num">02</div></div>
+        <div class="field">
+          <div class="range-top"><span class="lbl" style="margin:0">Length</span><div class="range-val" id="pwd-len-val">16</div></div>
+          <input type="range" id="pwd-len" min="6" max="64" value="16" step="1" oninput="document.getElementById('pwd-len-val').textContent=this.value;genPwd()">
+        </div>
+        <span class="lbl">Include</span>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox" id="pwd-upper" checked onchange="genPwd()"> Uppercase A–Z</label>
+          <label class="check-item"><input type="checkbox" id="pwd-lower" checked onchange="genPwd()"> Lowercase a–z</label>
+          <label class="check-item"><input type="checkbox" id="pwd-num" checked onchange="genPwd()"> Numbers 0–9</label>
+          <label class="check-item"><input type="checkbox" id="pwd-sym" onchange="genPwd()"> Symbols !@#$</label>
+        </div>
+        <div class="pwd-display" id="pwd-out">—</div>
+        <div class="str-row">
+          <div class="str-bar"><div class="str-fill" id="str-fill" style="width:0%"></div></div>
+          <div class="str-lbl" id="str-lbl" style="color:var(--muted)">—</div>
+        </div>
+        <div class="btn-row">
+          <button class="action-btn" onclick="genPwd()"><i class="ti ti-refresh" aria-hidden="true"></i> Regenerate</button>
+          <button class="ghost-btn" onclick="copyPwd()"><i class="ti ti-copy" aria-hidden="true"></i> Copy</button>
+          <span class="flash" id="pwd-flash">Copied!</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-words">
+      <div class="card">
+        <div class="card-top"><h2>Word & Character Counter</h2><div class="tool-num">03</div></div>
+        <div class="field"><span class="lbl">Paste or type your text</span><textarea id="wc-text" rows="6" placeholder="Start typing or paste text here…" oninput="countWords()"></textarea></div>
+        <div class="stats-grid">
+          <div class="stat-box"><div class="stat-num" id="wc-words" style="color:var(--red)">0</div><div class="stat-lbl">Words</div></div>
+          <div class="stat-box"><div class="stat-num" id="wc-chars" style="color:var(--amber)">0</div><div class="stat-lbl">Characters</div></div>
+          <div class="stat-box"><div class="stat-num" id="wc-nospace" style="color:var(--blue)">0</div><div class="stat-lbl">No spaces</div></div>
+          <div class="stat-box"><div class="stat-num" id="wc-sent" style="color:var(--green)">0</div><div class="stat-lbl">Sentences</div></div>
+          <div class="stat-box"><div class="stat-num" id="wc-para" style="color:var(--muted2)">0</div><div class="stat-lbl">Paragraphs</div></div>
+          <div class="stat-box"><div class="stat-num" id="wc-read" style="color:var(--purple)">0</div><div class="stat-lbl">Min to read</div></div>
+        </div>
+        <div class="btn-row" style="margin-top:12px">
+          <button class="ghost-btn" onclick="document.getElementById('wc-text').value='';countWords()"><i class="ti ti-trash" aria-hidden="true"></i> Clear</button>
+          <button class="ghost-btn" onclick="copyStats()"><i class="ti ti-copy" aria-hidden="true"></i> Copy stats</button>
+          <span class="flash" id="wc-flash">Copied!</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-unit">
+      <div class="card">
+        <div class="card-top"><h2>Unit Converter</h2><div class="tool-num">04</div></div>
+        <div class="field"><span class="lbl">Category</span><select id="unit-cat" onchange="updateUnits()">
+          <option value="length">Length</option>
+          <option value="weight">Weight / Mass</option>
+          <option value="temp">Temperature</option>
+          <option value="area">Area</option>
+          <option value="speed">Speed</option>
+          <option value="data">Digital Storage</option>
+          <option value="time">Time</option>
+        </select></div>
+        <div class="conv-row">
+          <div class="field"><span class="lbl">From</span><select id="unit-from" onchange="convertUnit()"></select></div>
+          <button class="swap-btn" onclick="swapUnits()" aria-label="Swap units"><i class="ti ti-arrows-exchange" aria-hidden="true"></i></button>
+          <div class="field"><span class="lbl">To</span><select id="unit-to" onchange="convertUnit()"></select></div>
+        </div>
+        <div class="field"><span class="lbl">Value</span><input type="number" id="unit-val" placeholder="Enter a number…" oninput="convertUnit()"></div>
+        <div class="conv-result" id="unit-result">—</div>
+        <div class="conv-formula" id="unit-formula"></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-bmi">
+      <div class="card">
+        <div class="card-top"><h2>BMI Calculator</h2><div class="tool-num">05</div></div>
+        <div class="row2">
+          <div class="field"><span class="lbl">Height (cm)</span><input type="number" id="bmi-h" placeholder="e.g. 170"></div>
+          <div class="field"><span class="lbl">Weight (kg)</span><input type="number" id="bmi-w" placeholder="e.g. 65"></div>
+        </div>
+        <button class="action-btn" onclick="calcBMI()">Calculate BMI <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+        <div class="result-box" id="bmi-result">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1rem;">
+            <div><div class="lbl">Your BMI</div><div class="big-num" id="bmi-val" style="font-size:2.6rem;">—</div></div>
+            <div><div class="lbl">Category</div><div id="bmi-cat" style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-top:6px;">—</div><div id="bmi-ideal" style="font-size:11px;color:var(--muted);margin-top:3px;"></div></div>
+          </div>
+          <div class="bmi-scale-labels">
+            <span>Underweight<br>&lt;18.5</span><span>Normal<br>18.5–25</span><span>Overweight<br>25–30</span><span>Obese<br>≥30</span>
+          </div>
+          <div class="bmi-bar"><div class="bmi-marker" id="bmi-marker"></div></div>
+          <div class="divider"></div>
+          <div id="bmi-tip" style="font-size:13px;color:var(--muted2);line-height:1.7;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+  © 2026 Toolora · Made by <span class="creator-name">Anshul Raj Verma</span>
+</div>
+</div>
+
+<script>
+function setTheme(t){
+  document.getElementById('et-root').setAttribute('data-theme',t);
+  document.getElementById('btn-light').classList.toggle('active',t==='light');
+  document.getElementById('btn-dark').classList.toggle('active',t==='dark');
+}
+function switchTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+const todayStr=new Date().toISOString().split('T')[0];
+document.getElementById('dob').max=todayStr;
+document.getElementById('as-of').max=todayStr;
+document.getElementById('as-of').value=todayStr;
+function calcAge(){
+  const dob=new Date(document.getElementById('dob').value);
+  const asOf=new Date(document.getElementById('as-of').value||todayStr);
+  if(!dob||isNaN(dob))return;
+  let y=asOf.getFullYear()-dob.getFullYear(),m=asOf.getMonth()-dob.getMonth(),d=asOf.getDate()-dob.getDate();
+  if(d<0){m--;d+=new Date(asOf.getFullYear(),asOf.getMonth(),0).getDate();}
+  if(m<0){y--;m+=12;}
+  document.getElementById('age-years').textContent=y;
+  document.getElementById('age-months').textContent=m;
+  document.getElementById('age-days').textContent=d;
+  const total=Math.floor((asOf-dob)/86400000);
+  document.getElementById('age-total').textContent=total.toLocaleString();
+  let next=new Date(asOf.getFullYear(),dob.getMonth(),dob.getDate());
+  if(next<=asOf)next.setFullYear(asOf.getFullYear()+1);
+  const dl=Math.ceil((next-asOf)/86400000);
+  document.getElementById('age-bday').textContent=dl===0?'Today!':dl+' days away';
+  document.getElementById('age-result').classList.add('show');
+}
+function genPwd(){
+  const len=+document.getElementById('pwd-len').value;
+  const u=document.getElementById('pwd-upper').checked,l=document.getElementById('pwd-lower').checked,n=document.getElementById('pwd-num').checked,s=document.getElementById('pwd-sym').checked;
+  let chars='';
+  if(u)chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if(l)chars+='abcdefghijklmnopqrstuvwxyz';
+  if(n)chars+='0123456789';
+  if(s)chars+='!@#$%^&*()_+-=[]{}|;:,.<>?';
+  if(!chars)chars='abcdefghijklmnopqrstuvwxyz';
+  const arr=new Uint32Array(len);
+  crypto.getRandomValues(arr);
+  document.getElementById('pwd-out').textContent=Array.from(arr,v=>chars[v%chars.length]).join('');
+  let score=[u,l,n,s].filter(Boolean).length;
+  if(len>=12)score++;if(len>=20)score++;if(len>=32)score++;
+  const pct=Math.min(100,Math.round((score/7)*100));
+  const tiers=[{c:'#ef4444',l:'Very weak'},{c:'#f97316',l:'Weak'},{c:'#facc15',l:'Fair'},{c:'#4ade80',l:'Strong'},{c:'#22c55e',l:'Very strong'}];
+  const idx=Math.min(4,Math.floor(score/7*5));
+  document.getElementById('str-fill').style.cssText=`width:${pct}%;background:${tiers[idx].c}`;
+  document.getElementById('str-lbl').textContent=tiers[idx].l;
+  document.getElementById('str-lbl').style.color=tiers[idx].c;
+}
+function copyPwd(){navigator.clipboard.writeText(document.getElementById('pwd-out').textContent).then(()=>flash('pwd-flash'));}
+genPwd();
+function countWords(){
+  const txt=document.getElementById('wc-text').value;
+  const words=txt.trim()?txt.trim().split(/\s+/).filter(w=>w.length>0).length:0;
+  document.getElementById('wc-words').textContent=words;
+  document.getElementById('wc-chars').textContent=txt.length;
+  document.getElementById('wc-nospace').textContent=txt.replace(/\s/g,'').length;
+  document.getElementById('wc-sent').textContent=txt.split(/[.!?]+/).filter(s=>s.trim().length>0).length;
+  const p=txt.split(/\n\s*\n/).filter(p=>p.trim().length>0).length||(txt.trim()?1:0);
+  document.getElementById('wc-para').textContent=p;
+  document.getElementById('wc-read').textContent=Math.max(words>0?1:0,Math.ceil(words/200));
+}
+function copyStats(){
+  const s=`Words: ${document.getElementById('wc-words').textContent} | Chars: ${document.getElementById('wc-chars').textContent} | Read: ${document.getElementById('wc-read').textContent} min`;
+  navigator.clipboard.writeText(s).then(()=>flash('wc-flash'));
+}
+const unitData={
+  length:{units:['Meter','Kilometer','Centimeter','Millimeter','Mile','Yard','Foot','Inch'],base:[1,1000,0.01,0.001,1609.344,0.9144,0.3048,0.0254]},
+  weight:{units:['Kilogram','Gram','Pound','Ounce','Ton (metric)','Milligram'],base:[1,0.001,0.453592,0.0283495,1000,0.000001]},
+  temp:{units:['Celsius','Fahrenheit','Kelvin'],base:null},
+  area:{units:['Sq. Meter','Sq. Kilometer','Sq. Mile','Acre','Hectare','Sq. Foot'],base:[1,1e6,2589988.11,4046.86,10000,0.092903]},
+  speed:{units:['m/s','km/h','mph','Knot','ft/s'],base:[1,0.277778,0.44704,0.514444,0.3048]},
+  data:{units:['Byte','Kilobyte','Megabyte','Gigabyte','Terabyte','Bit'],base:[1,1024,1048576,1073741824,1099511627776,0.125]},
+  time:{units:['Second','Minute','Hour','Day','Week','Month (avg)','Year'],base:[1,60,3600,86400,604800,2629746,31556952]},
+};
+function updateUnits(){
+  const cat=document.getElementById('unit-cat').value;
+  const units=unitData[cat].units;
+  ['unit-from','unit-to'].forEach((id,i)=>{
+    const sel=document.getElementById(id);
+    sel.innerHTML=units.map((u,j)=>`<option value="${j}">${u}</option>`).join('');
+    if(i===1&&units.length>1)sel.value=1;
+  });
+  convertUnit();
+}
+function swapUnits(){
+  const f=document.getElementById('unit-from').value,t=document.getElementById('unit-to').value;
+  document.getElementById('unit-from').value=t;document.getElementById('unit-to').value=f;convertUnit();
+}
+function convertUnit(){
+  const cat=document.getElementById('unit-cat').value,val=parseFloat(document.getElementById('unit-val').value);
+  const fi=+document.getElementById('unit-from').value,ti=+document.getElementById('unit-to').value;
+  const units=unitData[cat].units;
+  if(isNaN(val)){document.getElementById('unit-result').textContent='—';document.getElementById('unit-formula').textContent='';return;}
+  let result;
+  if(cat==='temp'){
+    const from=units[fi],to=units[ti];
+    if(from===to)result=val;
+    else if(from==='Celsius'&&to==='Fahrenheit')result=val*9/5+32;
+    else if(from==='Fahrenheit'&&to==='Celsius')result=(val-32)*5/9;
+    else if(from==='Celsius'&&to==='Kelvin')result=val+273.15;
+    else if(from==='Kelvin'&&to==='Celsius')result=val-273.15;
+    else if(from==='Fahrenheit'&&to==='Kelvin')result=(val-32)*5/9+273.15;
+    else result=(val-273.15)*9/5+32;
+  }else{result=(val*unitData[cat].base[fi])/unitData[cat].base[ti];}
+  const fmt=v=>Math.abs(v)<0.0001||Math.abs(v)>1e9?v.toExponential(4):parseFloat(v.toFixed(6)).toString();
+  document.getElementById('unit-result').textContent=fmt(result)+' '+units[ti];
+  document.getElementById('unit-formula').textContent=`${val} ${units[fi]} = ${fmt(result)} ${units[ti]}`;
+}
+updateUnits();
+function calcBMI(){
+  const h=parseFloat(document.getElementById('bmi-h').value)/100,w=parseFloat(document.getElementById('bmi-w').value);
+  if(!h||!w||h<=0||w<=0)return;
+  const bmi=w/(h*h);
+  document.getElementById('bmi-val').textContent=bmi.toFixed(1);
+  let cat,color,tip,pct;
+  if(bmi<18.5){cat='Underweight';color='#38bdf8';pct=(bmi/18.5)*25;tip='BMI is below the healthy range. Consider speaking with a nutritionist about a balanced diet.';}
+  else if(bmi<25){cat='Normal weight';color='#3ecf8e';pct=25+((bmi-18.5)/6.4)*25;tip='Great — your weight is in the healthy range. Maintain it with balanced diet and regular activity.';}
+  else if(bmi<30){cat='Overweight';color='#facc15';pct=50+((bmi-25)/5)*25;tip='BMI is slightly above the healthy range. Small changes like daily walks and less processed food can help.';}
+  else{cat='Obese';color='#f87171';pct=Math.min(97,75+((bmi-30)/10)*25);tip='Obesity increases risk of several conditions. Recommend consulting a healthcare professional for a personalized plan.';}
+  const idealMin=(18.5*h*h).toFixed(1),idealMax=(24.9*h*h).toFixed(1);
+  document.getElementById('bmi-cat').style.color=color;
+  document.getElementById('bmi-cat').textContent=cat;
+  document.getElementById('bmi-ideal').textContent=`Healthy weight for your height: ${idealMin}–${idealMax} kg`;
+  const marker=document.getElementById('bmi-marker');
+  marker.style.display='block';
+  marker.style.left=Math.max(3,Math.min(97,pct))+'%';
+  document.getElementById('bmi-tip').textContent=tip;
+  document.getElementById('bmi-result').classList.add('show');
+}
+function flash(id){const el=document.getElementById(id);el.style.display='inline';setTimeout(()=>el.style.display='none',2200);}
+</script>
